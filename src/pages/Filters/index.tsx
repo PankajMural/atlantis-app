@@ -31,10 +31,7 @@ export default function FiltersDrawer({ filters, onChange, onClose }: FiltersDra
   const totalApplied =
     local.location.length + local.timeOfDay.length + local.experience.length + local.cuisine.length
 
-  const apply = () => {
-    onChange(local)
-    onClose()
-  }
+  const apply = () => { onChange(local); onClose() }
 
   const clear = () => {
     const empty: FilterState = { location: [], timeOfDay: [], experience: [], cuisine: [] }
@@ -45,17 +42,15 @@ export default function FiltersDrawer({ filters, onChange, onClose }: FiltersDra
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col justify-end">
-      {/* Backdrop */}
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
 
-      {/* Sheet */}
-      <div className="relative bg-bg-default rounded-t-lg max-h-[90svh] flex flex-col w-mobile mx-auto">
+      <div className="relative bg-neutral-light-lightest rounded-t-lg max-h-[90svh] flex flex-col w-mobile mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-border-default shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-light-darkest shrink-0">
           <div>
-            <h2 className="text-xl font-semibold text-text-primary">Filters</h2>
+            <h2 className="text-xl font-semibold text-neutral-dark-darkest">Filters</h2>
             {totalApplied > 0 && (
-              <p className="text-sm text-text-secondary mt-0.5">
+              <p className="text-sm text-neutral-dark-light mt-0.5">
                 {totalApplied} filter{totalApplied > 1 ? 's' : ''} applied
               </p>
             )}
@@ -69,7 +64,6 @@ export default function FiltersDrawer({ filters, onChange, onClose }: FiltersDra
 
         {/* Scrollable filter content */}
         <div className="flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-6">
-
           <FilterSection title="Location">
             <div className="flex gap-2 flex-wrap">
               {LOCATIONS.map((loc) => (
@@ -127,7 +121,7 @@ export default function FiltersDrawer({ filters, onChange, onClose }: FiltersDra
         </div>
 
         {/* Footer buttons */}
-        <div className="px-6 py-4 border-t border-border-default flex flex-col gap-3 shrink-0">
+        <div className="px-6 py-4 border-t border-neutral-light-darkest flex flex-col gap-3 shrink-0">
           <Button variant="primary" size="full" onClick={apply}>
             Apply filters
           </Button>
@@ -144,8 +138,8 @@ function FilterSection({ title, children }: { title: string; children: React.Rea
   return (
     <div>
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-base font-semibold text-text-primary">{title}</h3>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-text-secondary">
+        <h3 className="text-base font-semibold text-neutral-dark-darkest">{title}</h3>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-neutral-dark-light">
           <path d="M19 9l-7 7-7-7" />
         </svg>
       </div>

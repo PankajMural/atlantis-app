@@ -54,10 +54,11 @@ export default {
         'brand-dark':              '#2F3036',
       },
       fontFamily: {
-        heading: ['"Atlantis Resorts"', 'Georgia', 'serif'],
-        sans:    ['"Averta PE"', 'system-ui', 'sans-serif'],
-        ui:      ['"Inter"', 'system-ui', 'sans-serif'],
-        mono:    ['"Roboto Mono"', 'monospace'],
+        headline: ['AtlantisResorts', 'serif'],
+        heading:  ['AtlantisResorts', 'Georgia', 'serif'],
+        sans:     ['"Averta PE"', 'system-ui', 'sans-serif'],
+        ui:       ['"Inter"', 'system-ui', 'sans-serif'],
+        mono:     ['"Roboto Mono"', 'monospace'],
       },
       fontSize: {
         'xs':   ['10px', { lineHeight: '1.4' }],

@@ -11,9 +11,9 @@ export default function CheckboxField({ label, checked = false, onChange }: Chec
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange?.(e.target.checked)}
-        className="w-4 h-4 rounded-sm border border-border-default accent-atlantis-blue-600"
+        className="w-4 h-4 rounded-sm border border-neutral-light-darkest accent-highlight-darkest"
       />
-      <span className="text-sm text-text-primary">{label}</span>
+      <span className="text-sm text-neutral-dark-darkest">{label}</span>
     </label>
   )
 }

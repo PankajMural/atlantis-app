@@ -12,10 +12,10 @@ export default function DiningSection({ venues }: DiningSectionProps) {
   return (
     <div>
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-lg font-semibold text-text-primary">Dining</h3>
+        <h3 className="text-xl font-semibold text-neutral-dark-darkest">Dining</h3>
         <button
           onClick={() => navigate('/dining')}
-          className="text-sm text-atlantis-blue-600"
+          className="text-sm font-semibold text-highlight-darkest"
         >
           See all
         </button>

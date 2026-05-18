@@ -1,3 +1,5 @@
+@import './styles/tokens.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -31,7 +33,7 @@
   --color-error-dark:              #ED3241;
 
   /* Typography */
-  --font-heading:  "Atlantis Resorts", Georgia, serif;
+  --font-headline: 'AtlantisResorts', serif;
   --font-body:     "Averta PE", system-ui, sans-serif;
   --font-ui:       "Inter", system-ui, sans-serif;
 
@@ -56,6 +58,11 @@ body {
   font-family: var(--font-body);
   color: var(--color-neutral-dark-darkest);
   -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'AtlantisResorts', serif;
+  font-weight: normal;
 }
 
 #root {

@@ -6,17 +6,17 @@ interface ExperienceDetailsProps {
 
 export default function ExperienceDetails({ details }: ExperienceDetailsProps) {
   return (
-    <div className="rounded-md border border-border-default overflow-hidden bg-bg-default">
+    <div className="rounded-lg border border-neutral-light-darkest overflow-hidden bg-neutral-light-lightest">
       {details.map((detail, i) => (
         <div
           key={i}
           className={[
             'flex items-center justify-between px-4 py-3',
-            i < details.length - 1 ? 'border-b border-border-default' : '',
+            i < details.length - 1 ? 'border-b border-neutral-light-darkest' : '',
           ].join(' ')}
         >
-          <span className="text-sm text-text-secondary">{detail.label}</span>
-          <span className="text-sm font-semibold text-text-primary">{detail.value}</span>
+          <span className="text-sm text-neutral-dark-light">{detail.label}</span>
+          <span className="text-sm font-semibold text-neutral-dark-darkest">{detail.value}</span>
         </div>
       ))}
     </div>

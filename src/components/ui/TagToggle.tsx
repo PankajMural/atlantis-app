@@ -12,8 +12,8 @@ export default function TagToggle({ label, selected = false, onChange, className
       className={[
         'h-tag-toggle px-3 rounded-md border text-sm transition-colors',
         selected
-          ? 'border-brand-dark bg-brand-dark text-text-on-brand'
-          : 'border-border-default bg-bg-default text-text-primary',
+          ? 'border-neutral-dark-dark bg-neutral-dark-dark text-neutral-light-lightest'
+          : 'border-neutral-light-darkest bg-neutral-light-lightest text-neutral-dark-darkest',
         className,
       ].join(' ')}
     >

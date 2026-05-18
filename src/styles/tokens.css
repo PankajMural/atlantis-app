@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'AtlantisResorts';
+  src: url('./fonts/AtlantisResorts-Headline.ttf') format('truetype'),
+       url('./fonts/AtlantisResorts-Headline.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

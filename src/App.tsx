@@ -14,7 +14,7 @@ import CurrentStatusScreen from './pages/Onboarding/CurrentStatus'
 
 export default function App() {
   return (
-    <div className="w-mobile max-w-full bg-bg-default min-h-svh relative overflow-hidden">
+    <div className="w-mobile max-w-full bg-neutral-light-lightest min-h-svh relative overflow-hidden">
       <Routes>
         {/* Main app */}
         <Route path="/" element={<Home />} />

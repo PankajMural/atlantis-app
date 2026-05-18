@@ -20,7 +20,7 @@ const MOCK_VENUES: Record<string, DiningVenue> = {
     description: 'Dine in an ethereal underwater world surrounded by the Ambassador Lagoon.',
     michelinStars: { count: 3 },
     timeOfDay: ['Dinner'],
-    specialOffer: 'Special offer — free desert with dinner this Saturday',
+    specialOffer: 'Special offer — free dessert with dinner this Saturday',
   },
   '2': {
     id: '2',
@@ -33,7 +33,7 @@ const MOCK_VENUES: Record<string, DiningVenue> = {
 }
 
 const MOCK_EXPERIENCES: Experience[] = [
-  { id: 'e1', title: 'Signature Tasting Menu', subtitle: '7 courses', description: 'An immersive journey through Ossiano\'s finest seasonal ingredients.', type: 'dining' },
+  { id: 'e1', title: 'Signature Tasting Menu', subtitle: '7 courses', description: "An immersive journey through Ossiano's finest seasonal ingredients.", type: 'dining' },
   { id: 'e2', title: 'Private Dining', subtitle: 'For 2–10 guests', description: 'Exclusive table submerged beneath the Ambassador Lagoon.', type: 'dining' },
 ]
 
@@ -55,7 +55,7 @@ export default function DiningDetail() {
   const venue = MOCK_VENUES[id ?? '1'] ?? MOCK_VENUES['1']
 
   return (
-    <div className="flex flex-col min-h-svh bg-bg-default">
+    <div className="flex flex-col min-h-svh bg-neutral-light-lightest">
       <div className="relative">
         {/* Hero image */}
         <div className="w-full h-64 bg-placeholder" />
@@ -67,32 +67,25 @@ export default function DiningDetail() {
         </div>
       </div>
 
-      {/* Body */}
       <div className="flex-1 overflow-y-auto pb-4">
         <div className="px-4 pt-4 flex flex-col gap-4">
 
           {/* Venue header */}
           <div>
-            <p className="text-sm text-text-secondary">{venue.cuisine}</p>
+            <p className="text-sm text-neutral-dark-light font-heading tracking-wide">{venue.cuisine}</p>
             <div className="flex items-center gap-2 mt-1">
-              <span className="text-xl font-semibold text-text-primary">{venue.name}</span>
+              <span className="text-2xl font-semibold text-neutral-dark-darkest">{venue.name}</span>
               {venue.michelinStars && (
-                <span className="text-sm">
-                  {'⭐'.repeat(venue.michelinStars.count)}
-                </span>
+                <span className="text-sm">{'⭐'.repeat(venue.michelinStars.count)}</span>
               )}
             </div>
-            <p className="text-base text-text-secondary mt-1">{venue.location}</p>
+            <p className="text-base text-neutral-dark-light mt-1">{venue.location}</p>
           </div>
 
-          {/* Special offer banner (if present) */}
-          {venue.specialOffer && (
-            <SpecialOfferBanner text={venue.specialOffer} />
-          )}
+          {venue.specialOffer && <SpecialOfferBanner text={venue.specialOffer} />}
 
-          <p className="text-base text-text-primary leading-relaxed">{venue.description}</p>
+          <p className="text-base text-neutral-dark-darkest leading-relaxed">{venue.description}</p>
 
-          {/* Auth-gated section */}
           {IS_LOGGED_IN ? (
             <Badge items={BADGE_ITEMS} />
           ) : (

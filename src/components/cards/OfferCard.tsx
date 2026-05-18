@@ -11,7 +11,7 @@ export default function OfferCard({ offer }: OfferCardProps) {
   return (
     <button
       onClick={() => offer.venueId && navigate(`/dining/${offer.venueId}`)}
-      className="flex w-content h-offer-card rounded-md overflow-hidden shadow-card bg-bg-default border border-border-default text-left shrink-0"
+      className="flex w-content h-offer-card rounded-lg overflow-hidden shadow-card bg-neutral-light-lightest border border-neutral-light-darkest text-left shrink-0"
     >
       <div className="w-24 h-full bg-placeholder shrink-0">
         {offer.imageUrl && (
@@ -21,13 +21,13 @@ export default function OfferCard({ offer }: OfferCardProps) {
       <div className="flex-1 p-3 flex flex-col justify-between">
         <div>
           {offer.tag && (
-            <span className="text-xs text-atlantis-blue-600 font-semibold uppercase tracking-wide">
+            <span className="font-heading text-xs text-highlight-darkest font-semibold uppercase tracking-wide">
               {offer.tag}
             </span>
           )}
-          <p className="text-base font-semibold text-text-primary mt-1 leading-tight">{offer.title}</p>
+          <p className="text-base font-semibold text-neutral-dark-darkest mt-1 leading-tight">{offer.title}</p>
         </div>
-        <p className="text-sm text-text-secondary">{offer.subtitle}</p>
+        <p className="text-sm text-neutral-dark-light">{offer.subtitle}</p>
       </div>
     </button>
   )

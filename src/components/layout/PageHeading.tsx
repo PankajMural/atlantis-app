@@ -16,7 +16,7 @@ export default function PageHeading({ title, showBack = true, onBack }: PageHead
   }
 
   return (
-    <div className="h-page-heading w-full bg-bg-default flex items-center px-4 gap-2 shrink-0">
+    <div className="h-page-heading w-full bg-neutral-light-lightest flex items-center px-4 gap-2 shrink-0">
       {showBack && (
         <IconButton onClick={handleBack} aria-label="Go back">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -24,7 +24,7 @@ export default function PageHeading({ title, showBack = true, onBack }: PageHead
           </svg>
         </IconButton>
       )}
-      <h1 className="text-xl font-semibold text-text-primary tracking-tight flex-1">
+      <h1 className="text-2xl font-semibold text-neutral-dark-darkest tracking-tight flex-1">
         {title}
       </h1>
     </div>

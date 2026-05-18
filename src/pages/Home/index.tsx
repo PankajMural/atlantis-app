@@ -26,13 +26,13 @@ const MOCK_VENUES: DiningVenue[] = [
 ]
 
 const MOCK_EXPERIENCES: Experience[] = [
-  { id: '1', title: 'Aquaventure Waterpark', subtitle: 'Full day access', description: 'The Middle East\'s most iconic waterpark with over 105 rides and attractions.', type: 'experience' },
+  { id: '1', title: 'Aquaventure Waterpark', subtitle: 'Full day access', description: "The Middle East's most iconic waterpark with over 105 rides and attractions.", type: 'experience' },
   { id: '2', title: 'The Lost Chambers Aquarium', subtitle: 'Self-guided tour', description: 'Explore 65,000 marine animals across 20 mysterious chambers.', type: 'experience' },
 ]
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-svh bg-bg-default">
+    <div className="flex flex-col min-h-svh bg-neutral-light-lightest">
       <StatusBar />
       <div className="flex-1 overflow-y-auto">
         <WelcomeUser user={MOCK_USER} />

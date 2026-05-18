@@ -23,14 +23,12 @@ export default function DiningList() {
   const filtersOpen = searchParams.get('filters') === 'open'
   const [activeFilters, setActiveFilters] = useState<FilterState>(EMPTY_FILTERS)
 
-  const appliedTags = useMemo(() => {
-    return [
-      ...activeFilters.location,
-      ...activeFilters.timeOfDay,
-      ...activeFilters.experience,
-      ...activeFilters.cuisine,
-    ]
-  }, [activeFilters])
+  const appliedTags = useMemo(() => [
+    ...activeFilters.location,
+    ...activeFilters.timeOfDay,
+    ...activeFilters.experience,
+    ...activeFilters.cuisine,
+  ], [activeFilters])
 
   const removeTag = (tag: string) => {
     setActiveFilters((prev) => ({
@@ -41,13 +39,13 @@ export default function DiningList() {
     }))
   }
 
-  const openFilters = () => setSearchParams({ filters: 'open' })
+  const openFilters  = () => setSearchParams({ filters: 'open' })
   const closeFilters = () => setSearchParams({})
 
   return (
-    <div className="flex flex-col min-h-svh bg-bg-default">
+    <div className="flex flex-col min-h-svh bg-neutral-light-lightest">
       <StatusBar />
-      <PageHeading title="Dining" />
+      <PageHeading title="Dining" showBack={false} />
 
       <div className="flex-1 overflow-y-auto">
         {/* Filter bar */}
@@ -77,7 +75,6 @@ export default function DiningList() {
 
       <NavigationBar />
 
-      {/* Filter drawer overlay */}
       {filtersOpen && (
         <FiltersDrawer
           filters={activeFilters}

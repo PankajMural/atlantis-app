@@ -20,7 +20,7 @@ export default function NavWithButton({
   const navigate = useNavigate()
 
   return (
-    <div className="w-full bg-bg-default border-t border-border-default px-4 py-3 shrink-0">
+    <div className="w-full bg-neutral-light-lightest border-t border-neutral-light-darkest px-4 py-3 shrink-0">
       {showBack && (
         <div className="mb-3">
           <IconButton onClick={() => navigate(-1)} aria-label="Go back">
