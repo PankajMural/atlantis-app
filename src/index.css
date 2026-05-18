@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Neutral — Light */
+  --color-neutral-light-lightest:  #FFFFFF;
+  --color-neutral-light-light:     #F8F9FE;
+  --color-neutral-light-medium:    #E8E9F1;
+  --color-neutral-light-darkest:   #C5C6CC;
+
+  /* Neutral — Dark */
+  --color-neutral-dark-lightest:   #8F9098;
+  --color-neutral-dark-light:      #71727A;
+  --color-neutral-dark-medium:     #494A50;
+  --color-neutral-dark-dark:       #2F3036;
+  --color-neutral-dark-darkest:    #1F2024;
+
+  /* Highlight (Brand Blue) */
+  --color-highlight-lightest:      #EAF2FF;
+  --color-highlight-light:         #B4DBFF;
+  --color-highlight-darkest:       #3370AB;
+
+  /* Support */
+  --color-success-light:           #E7F4E8;
+  --color-success-medium:          #3AC0A0;
+  --color-warning-light:           #FFF4E4;
+  --color-warning-medium:          #FFB37C;
+  --color-error-light:             #FFE2E5;
+  --color-error-medium:            #FF616D;
+  --color-error-dark:              #ED3241;
+
+  /* Typography */
+  --font-heading:  "Atlantis Resorts", Georgia, serif;
+  --font-body:     "Averta PE", system-ui, sans-serif;
+  --font-ui:       "Inter", system-ui, sans-serif;
+
+  /* Radius */
+  --radius-btn:    8px;
+  --radius-tag:    12px;
+  --radius-card:   16px;
+
+  /* Shadows */
+  --shadow-card:
+    0px 4px 4px -1px rgba(12,12,13,0.05),
+    0px 4px 4px -1px rgba(12,12,13,0.10);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f0f0f0;
+  font-family: var(--font-body);
+  color: var(--color-neutral-dark-darkest);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  min-height: 100svh;
+}
