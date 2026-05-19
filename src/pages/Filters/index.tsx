@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import IconButton from '../../components/ui/IconButton'
 import TagToggle from '../../components/ui/TagToggle'
 import CheckboxField from '../../components/ui/CheckboxField'
@@ -41,10 +42,22 @@ export default function FiltersDrawer({ filters, onChange, onClose }: FiltersDra
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col justify-end">
+    <motion.div
+      className="fixed inset-0 z-50 flex flex-col justify-end"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.15 } }}
+      transition={{ duration: 0.2 }}
+    >
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
 
-      <div className="relative bg-neutral-light-lightest rounded-t-lg max-h-[90svh] flex flex-col w-mobile mx-auto">
+      <motion.div
+        className="relative bg-neutral-light-lightest rounded-t-lg max-h-[90svh] flex flex-col w-mobile mx-auto"
+        initial={{ y: '100%' }}
+        animate={{ y: 0 }}
+        exit={{ y: '100%', transition: { duration: 0.22, ease: 'easeIn' } }}
+        transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-light-darkest shrink-0">
           <div>
@@ -129,8 +142,8 @@ export default function FiltersDrawer({ filters, onChange, onClose }: FiltersDra
             Clear all
           </Button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }
 

@@ -1,16 +1,19 @@
-import type { ButtonHTMLAttributes } from 'react'
+import { motion, type HTMLMotionProps } from 'framer-motion'
 import type { ButtonVariant, ButtonSize } from '../../types'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'ref'> {
   variant?: ButtonVariant
   size?: ButtonSize
 }
 
+// Figma node 248:4131 — Button (all variants)
+// Font: Averta PE Regular 400 12px | Gap: 8px | Padding: 16px H / 12px V
+// Primary/Secondary: radius 0px | Tertiary: radius 8px
 const variantClasses: Record<ButtonVariant, string> = {
-  'primary':    'bg-atlantis-blue-600 text-text-on-brand disabled:opacity-40 disabled:cursor-not-allowed',
-  'secondary':  'bg-transparent text-atlantis-blue-600 border-[1.5px] border-atlantis-blue-600 disabled:opacity-40 disabled:cursor-not-allowed',
-  'brand-dark': 'bg-brand-dark text-text-on-brand',
-  'tertiary':   'bg-transparent text-atlantis-blue-600',
+  'primary':    'bg-highlight-darkest text-white rounded-none disabled:opacity-40 disabled:cursor-not-allowed',
+  'secondary':  'bg-transparent text-highlight-darkest border-[1.5px] border-highlight-darkest rounded-none disabled:opacity-40 disabled:cursor-not-allowed',
+  'brand-dark': 'bg-neutral-dark-darkest text-white rounded-none',
+  'tertiary':   'bg-transparent text-highlight-darkest rounded-[8px]',
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -26,9 +29,10 @@ export default function Button({
   ...props
 }: ButtonProps) {
   return (
-    <button
+    <motion.button
+      whileTap={props.disabled ? undefined : { scale: 0.97 }}
       className={[
-        'inline-flex items-center justify-center rounded-sm text-base font-semibold transition-colors',
+        'inline-flex items-center justify-center gap-2 text-sm font-normal transition-colors',
         variantClasses[variant],
         sizeClasses[size],
         className,
@@ -36,6 +40,6 @@ export default function Button({
       {...props}
     >
       {children}
-    </button>
+    </motion.button>
   )
 }

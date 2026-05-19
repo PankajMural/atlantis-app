@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useSearchParams, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import PageTransition from '../../../components/ui/PageTransition'
 import StatusBar from '../../../components/layout/StatusBar'
 import PageHeading from '../../../components/layout/PageHeading'
 import Button from '../../../components/ui/Button'
@@ -39,7 +41,7 @@ export default function OTPVerifyScreen() {
       setOtp('')
       return
     }
-    navigate('/onboarding/new')
+    navigate('/onboarding/step-1')
   }
 
   const handleTryAnotherWay = (method: 'email-otp' | 'phone-otp' | 'password') => {
@@ -55,53 +57,57 @@ export default function OTPVerifyScreen() {
   return (
     <div className="flex flex-col min-h-svh bg-bg-default">
       <StatusBar />
-      <PageHeading title="" />
+      <PageTransition className="flex-1 flex flex-col">
+        <PageHeading title="" />
 
-      <div className="flex-1 flex flex-col px-6 pt-2">
-        <h2 className="text-2xl font-semibold text-text-primary mb-2">
-          Let's confirm it's you
-        </h2>
-        <p className="text-base text-text-secondary mb-8 leading-normal">{subtitle}</p>
+        <div className="flex-1 flex flex-col px-6 pt-2">
+          <h2 className="text-2xl font-semibold text-text-primary mb-2">
+            Let's confirm it's you
+          </h2>
+          <p className="text-base text-text-secondary mb-8 leading-normal">{subtitle}</p>
 
-        <OTPInput value={otp} error={!!error} />
+          <OTPInput value={otp} error={!!error} />
 
-        {error && (
-          <p className="text-sm text-error mt-3">{error}</p>
-        )}
+          {error && (
+            <p className="text-sm text-error mt-3">{error}</p>
+          )}
 
-        <button className="mt-5 text-sm text-atlantis-blue-600 text-left">
-          Didn't get it? Resend a new code
-        </button>
-
-        <div className="flex-1" />
-
-        <div className="flex flex-col gap-4 pb-4">
-          <Button
-            variant="primary"
-            size="full"
-            onClick={handleContinue}
-            disabled={otp.length < 6}
-          >
-            Continue
-          </Button>
-          <button
-            onClick={() => setTrySheetOpen(true)}
-            className="text-base font-semibold text-atlantis-blue-600 text-center"
-          >
-            Try another way
+          <button className="mt-5 text-sm text-atlantis-blue-600 text-left">
+            Didn't get it? Resend a new code
           </button>
+
+          <div className="flex-1" />
+
+          <div className="flex flex-col gap-4 pb-4">
+            <Button
+              variant="primary"
+              size="full"
+              onClick={handleContinue}
+              disabled={otp.length < 6}
+            >
+              Continue
+            </Button>
+            <button
+              onClick={() => setTrySheetOpen(true)}
+              className="text-base font-semibold text-atlantis-blue-600 text-center"
+            >
+              Try another way
+            </button>
+          </div>
         </div>
-      </div>
 
-      <NumberPad onDigit={handleDigit} onDelete={handleDelete} />
+        <NumberPad onDigit={handleDigit} onDelete={handleDelete} />
+      </PageTransition>
 
-      {trySheetOpen && (
-        <TryAnotherWaySheet
-          context={via}
-          onSelect={handleTryAnotherWay}
-          onClose={() => setTrySheetOpen(false)}
-        />
-      )}
+      <AnimatePresence>
+        {trySheetOpen && (
+          <TryAnotherWaySheet
+            context={via}
+            onSelect={handleTryAnotherWay}
+            onClose={() => setTrySheetOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import PageTransition from '../../../components/ui/PageTransition'
 import StatusBar from '../../../components/layout/StatusBar'
 import Button from '../../../components/ui/Button'
 import TextField from '../../../components/ui/TextField'
@@ -22,8 +23,7 @@ export default function WelcomeScreen() {
   return (
     <div className="flex flex-col min-h-svh bg-bg-default">
       <StatusBar />
-
-      <div className="flex-1 flex flex-col px-6 pt-8 pb-8 overflow-y-auto">
+      <PageTransition className="flex-1 flex flex-col px-6 pt-8 pb-8 overflow-y-auto">
         {/* Brand header */}
         <div className="flex flex-col items-center text-center mb-10">
           <div className="w-16 h-16 rounded-full bg-highlight-lightest flex items-center justify-center mb-5">
@@ -82,7 +82,7 @@ export default function WelcomeScreen() {
             Continue as a guest
           </button>
         </div>
-      </div>
+      </PageTransition>
     </div>
   )
 }

@@ -1,5 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
+import BookPage from './pages/Book'
+import MyStayPage from './pages/MyStay'
+import ProfilePage from './pages/Profile'
 import DiningList from './pages/DiningList'
 import DiningDetail from './pages/DiningDetail'
 import SplashScreen from './pages/Splash'
@@ -16,8 +19,11 @@ export default function App() {
   return (
     <div className="w-mobile max-w-full bg-neutral-light-lightest min-h-svh relative overflow-hidden">
       <Routes>
-        {/* Main app */}
+        {/* Main app — bottom nav tabs */}
         <Route path="/" element={<Home />} />
+        <Route path="/book" element={<BookPage />} />
+        <Route path="/my-stay" element={<MyStayPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/dining" element={<DiningList />} />
         <Route path="/dining/:id" element={<DiningDetail />} />
 
@@ -30,9 +36,9 @@ export default function App() {
         <Route path="/auth/password" element={<PasswordLoginScreen />} />
 
         {/* Onboarding */}
-        <Route path="/onboarding/new" element={<NewExperienceScreen />} />
-        <Route path="/onboarding/features" element={<WhatNotToMissScreen />} />
-        <Route path="/onboarding/status" element={<CurrentStatusScreen />} />
+        <Route path="/onboarding/step-1" element={<NewExperienceScreen />} />
+        <Route path="/onboarding/step-2" element={<WhatNotToMissScreen />} />
+        <Route path="/onboarding/step-3" element={<CurrentStatusScreen />} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import IconButton from './IconButton'
 
@@ -9,10 +10,21 @@ interface BottomSheetProps {
 
 export default function BottomSheet({ onClose, children, showClose = true }: BottomSheetProps) {
   return (
-    <div className="fixed inset-0 z-50 flex flex-col justify-end">
+    <motion.div
+      className="fixed inset-0 z-50 flex flex-col justify-end"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.15 } }}
+      transition={{ duration: 0.2 }}
+    >
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative bg-bg-default rounded-t-lg w-mobile mx-auto flex flex-col max-h-[90svh]">
-        {/* Pill handle */}
+      <motion.div
+        className="relative bg-bg-default rounded-t-lg w-mobile mx-auto flex flex-col max-h-[90svh]"
+        initial={{ y: '100%' }}
+        animate={{ y: 0 }}
+        exit={{ y: '100%', transition: { duration: 0.22, ease: 'easeIn' } }}
+        transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+      >
         <div className="flex justify-center pt-3 shrink-0">
           <div className="w-10 h-1 rounded-full bg-neutral-light-darkest" />
         </div>
@@ -26,7 +38,7 @@ export default function BottomSheet({ onClose, children, showClose = true }: Bot
           </div>
         )}
         {children}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }

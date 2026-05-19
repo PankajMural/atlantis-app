@@ -7,6 +7,10 @@ interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'cl
   showPasswordToggle?: boolean
 }
 
+// Figma node 267:5097 — Text Field
+// Height: 48px | Font: Averta PE Regular 14px | Placeholder: #8F9098
+// Default border: 1px #C5C6CC | Focus: 1.5px #3370AB | Error: 1.5px #FF616D
+// Border radius: 0 (square corners per Figma)
 export default function TextField({ label, error, showPasswordToggle, type, ...props }: TextFieldProps) {
   const [showPw, setShowPw] = useState(false)
   const resolvedType = showPasswordToggle ? (showPw ? 'text' : 'password') : type
@@ -14,24 +18,24 @@ export default function TextField({ label, error, showPasswordToggle, type, ...p
   return (
     <div className="flex flex-col gap-1.5">
       {label && (
-        <label className="text-sm font-semibold text-text-primary">{label}</label>
+        <label className="text-sm font-semibold text-neutral-dark-darkest">{label}</label>
       )}
       <div className={[
-        'flex items-center h-12 px-4 rounded-md border bg-bg-default transition-colors',
+        'flex items-center h-12 px-4 bg-neutral-light-lightest transition-colors',
         error
-          ? 'border-[1.5px] border-error'
-          : 'border-border-default focus-within:border-[1.5px] focus-within:border-highlight-darkest',
+          ? 'border-[1.5px] border-support-error-medium'
+          : 'border border-neutral-light-darkest focus-within:border-[1.5px] focus-within:border-highlight-darkest',
       ].join(' ')}>
         <input
           type={resolvedType}
-          className="flex-1 outline-none bg-transparent text-base text-text-primary placeholder:text-text-tertiary"
+          className="flex-1 outline-none bg-transparent text-sm text-neutral-dark-darkest placeholder:text-neutral-dark-lightest"
           {...props}
         />
         {showPasswordToggle && (
           <button
             type="button"
             onClick={() => setShowPw(p => !p)}
-            className="ml-2 text-text-secondary shrink-0"
+            className="ml-2 text-neutral-dark-light shrink-0"
             tabIndex={-1}
           >
             {showPw ? (
@@ -48,7 +52,7 @@ export default function TextField({ label, error, showPasswordToggle, type, ...p
           </button>
         )}
       </div>
-      {error && <p className="text-xs text-error mt-0.5">{error}</p>}
+      {error && <p className="text-xs text-support-error-medium mt-0.5">{error}</p>}
     </div>
   )
 }

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import PageTransition from '../../../components/ui/PageTransition'
 import StatusBar from '../../../components/layout/StatusBar'
 import PageHeading from '../../../components/layout/PageHeading'
 import Button from '../../../components/ui/Button'
@@ -23,7 +25,7 @@ export default function PasswordLoginScreen() {
       setError('Incorrect Password, Please try again.')
       return
     }
-    navigate('/onboarding/new')
+    navigate('/onboarding/step-1')
   }
 
   const handleTryAnotherWay = (method: 'email-otp' | 'phone-otp' | 'password') => {
@@ -38,61 +40,65 @@ export default function PasswordLoginScreen() {
   return (
     <div className="flex flex-col min-h-svh bg-bg-default">
       <StatusBar />
-      <PageHeading title="" />
+      <PageTransition className="flex-1 flex flex-col">
+        <PageHeading title="" />
 
-      <div className="flex-1 flex flex-col px-6 pt-2">
-        <h2 className="text-2xl font-semibold text-text-primary mb-8">
-          Login with your password
-        </h2>
+        <div className="flex-1 flex flex-col px-6 pt-2">
+          <h2 className="text-2xl font-semibold text-text-primary mb-8">
+            Login with your password
+          </h2>
 
-        <div className="flex flex-col gap-4">
-          <TextField
-            label="Email or Mobile Number"
-            value={identifier}
-            readOnly
-            onChange={() => {}}
-          />
-          <TextField
-            label="Password"
-            placeholder="Enter your password"
-            type="password"
-            showPasswordToggle
-            value={password}
-            error={error}
-            onChange={e => { setPassword(e.target.value); setError('') }}
-            autoFocus
-          />
+          <div className="flex flex-col gap-4">
+            <TextField
+              label="Email or Mobile Number"
+              value={identifier}
+              readOnly
+              onChange={() => {}}
+            />
+            <TextField
+              label="Password"
+              placeholder="Enter your password"
+              type="password"
+              showPasswordToggle
+              value={password}
+              error={error}
+              onChange={e => { setPassword(e.target.value); setError('') }}
+              autoFocus
+            />
+          </div>
+
+          <div className="flex-1" />
+
+          <div className="flex flex-col gap-4 pb-8">
+            <Button
+              variant="primary"
+              size="full"
+              onClick={handleSignIn}
+              disabled={!password}
+            >
+              Sign In
+            </Button>
+            <button
+              onClick={() => setTrySheetOpen(true)}
+              className="text-base font-semibold text-atlantis-blue-600 text-center"
+            >
+              Try another way
+            </button>
+          </div>
         </div>
+      </PageTransition>
 
-        <div className="flex-1" />
-
-        <div className="flex flex-col gap-4 pb-8">
-          <Button
-            variant="primary"
-            size="full"
-            onClick={handleSignIn}
-            disabled={!password}
-          >
-            Sign In
-          </Button>
-          <button
-            onClick={() => setTrySheetOpen(true)}
-            className="text-base font-semibold text-atlantis-blue-600 text-center"
-          >
-            Try another way
-          </button>
-        </div>
-      </div>
-
-      {trySheetOpen && (
-        <TryAnotherWaySheet
-          context="password"
-          maskedEmail={maskedEmail}
-          maskedPhone="+97 *** *** 567"
-          onSelect={handleTryAnotherWay}
-          onClose={() => setTrySheetOpen(false)}
-        />
-      )}
+      <AnimatePresence>
+        {trySheetOpen && (
+          <TryAnotherWaySheet
+            context="password"
+            maskedEmail={maskedEmail}
+            maskedPhone="+97 *** *** 567"
+            onSelect={handleTryAnotherWay}
+            onClose={() => setTrySheetOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   )
 }

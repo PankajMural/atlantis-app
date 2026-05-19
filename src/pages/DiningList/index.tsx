@@ -1,5 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import PageTransition from '../../components/ui/PageTransition'
 import StatusBar from '../../components/layout/StatusBar'
 import NavigationBar from '../../components/layout/NavigationBar'
 import PageHeading from '../../components/layout/PageHeading'
@@ -45,43 +47,46 @@ export default function DiningList() {
   return (
     <div className="flex flex-col min-h-svh bg-neutral-light-lightest">
       <StatusBar />
-      <PageHeading title="Dining" showBack={false} />
+      <PageTransition className="flex-1 flex flex-col overflow-hidden">
+        <PageHeading title="Dining" showBack={false} />
 
-      <div className="flex-1 overflow-y-auto">
-        {/* Filter bar */}
-        <div className="px-4 pt-4">
-          <div className="flex items-center gap-2 mb-4 overflow-x-auto pb-1">
-            <Button
-              variant="secondary"
-              size="default"
-              className="shrink-0 text-sm h-tag px-3"
-              onClick={openFilters}
-            >
-              ⚙ Filters {appliedTags.length > 0 && `(${appliedTags.length})`}
-            </Button>
-            {appliedTags.map((tag) => (
-              <Tag key={tag} label={tag} onRemove={() => removeTag(tag)} />
+        <div className="flex-1 overflow-y-auto">
+          {/* Filter bar */}
+          <div className="px-4 pt-4">
+            <div className="flex items-center gap-2 mb-4 overflow-x-auto pb-1">
+              <Button
+                variant="secondary"
+                size="default"
+                className="shrink-0 text-sm h-tag px-3"
+                onClick={openFilters}
+              >
+                ⚙ Filters {appliedTags.length > 0 && `(${appliedTags.length})`}
+              </Button>
+              {appliedTags.map((tag) => (
+                <Tag key={tag} label={tag} onRemove={() => removeTag(tag)} />
+              ))}
+            </div>
+          </div>
+
+          {/* Offer list */}
+          <div className="px-4 flex flex-col gap-2 pb-6">
+            {MOCK_OFFERS.map((offer) => (
+              <OfferCard key={offer.id} offer={offer} />
             ))}
           </div>
         </div>
-
-        {/* Offer list */}
-        <div className="px-4 flex flex-col gap-2 pb-6">
-          {MOCK_OFFERS.map((offer) => (
-            <OfferCard key={offer.id} offer={offer} />
-          ))}
-        </div>
-      </div>
-
+      </PageTransition>
       <NavigationBar />
 
-      {filtersOpen && (
-        <FiltersDrawer
-          filters={activeFilters}
-          onChange={setActiveFilters}
-          onClose={closeFilters}
-        />
-      )}
+      <AnimatePresence>
+        {filtersOpen && (
+          <FiltersDrawer
+            filters={activeFilters}
+            onChange={setActiveFilters}
+            onClose={closeFilters}
+          />
+        )}
+      </AnimatePresence>
     </div>
   )
 }

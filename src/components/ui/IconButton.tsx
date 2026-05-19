@@ -1,12 +1,14 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import { motion, type HTMLMotionProps } from 'framer-motion'
+import type { ReactNode } from 'react'
 
-interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface IconButtonProps extends Omit<HTMLMotionProps<'button'>, 'ref'> {
   children: ReactNode
 }
 
 export default function IconButton({ children, className = '', ...props }: IconButtonProps) {
   return (
-    <button
+    <motion.button
+      whileTap={{ scale: 0.97 }}
       className={[
         'w-btn-icon h-btn-icon flex items-center justify-center rounded-sm',
         'text-neutral-dark-darkest bg-transparent transition-colors active:bg-neutral-light-light',
@@ -15,6 +17,6 @@ export default function IconButton({ children, className = '', ...props }: IconB
       {...props}
     >
       {children}
-    </button>
+    </motion.button>
   )
 }

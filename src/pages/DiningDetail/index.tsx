@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import PageTransition from '../../components/ui/PageTransition'
 import StatusBar from '../../components/layout/StatusBar'
 import PageHeading from '../../components/layout/PageHeading'
 import NavWithButton from '../../components/layout/NavWithButton'
@@ -55,55 +56,59 @@ export default function DiningDetail() {
   const venue = MOCK_VENUES[id ?? '1'] ?? MOCK_VENUES['1']
 
   return (
-    <div className="flex flex-col min-h-svh bg-neutral-light-lightest">
-      <div className="relative">
-        {/* Hero image */}
-        <div className="w-full h-64 bg-placeholder" />
-        <div className="absolute top-0 left-0 w-full">
-          <StatusBar />
-        </div>
-        <div className="absolute top-status-bar left-0 w-full">
-          <PageHeading title="" />
-        </div>
+    <div className="relative flex flex-col min-h-svh bg-neutral-light-lightest">
+      {/* StatusBar — absolutely over hero, never animates */}
+      <div className="absolute top-0 left-0 w-full z-10">
+        <StatusBar />
       </div>
 
-      <div className="flex-1 overflow-y-auto pb-4">
-        <div className="px-4 pt-4 flex flex-col gap-4">
-
-          {/* Venue header */}
-          <div>
-            <p className="text-sm text-neutral-dark-light font-heading tracking-wide">{venue.cuisine}</p>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="text-2xl font-semibold text-neutral-dark-darkest">{venue.name}</span>
-              {venue.michelinStars && (
-                <span className="text-sm">{'⭐'.repeat(venue.michelinStars.count)}</span>
-              )}
+      <PageTransition className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 overflow-y-auto">
+          <div className="relative">
+            {/* Hero image */}
+            <div className="w-full h-64 bg-placeholder" />
+            <div className="absolute top-status-bar left-0 w-full">
+              <PageHeading title="" />
             </div>
-            <p className="text-base text-neutral-dark-light mt-1">{venue.location}</p>
           </div>
 
-          {venue.specialOffer && <SpecialOfferBanner text={venue.specialOffer} />}
+          <div className="px-4 pt-4 flex flex-col gap-4 pb-4">
 
-          <p className="text-base text-neutral-dark-darkest leading-relaxed">{venue.description}</p>
+            {/* Venue header */}
+            <div>
+              <p className="text-sm text-neutral-dark-light font-heading tracking-wide">{venue.cuisine}</p>
+              <div className="flex items-center gap-2 mt-1">
+                <span className="text-2xl font-semibold text-neutral-dark-darkest">{venue.name}</span>
+                {venue.michelinStars && (
+                  <span className="text-sm">{'⭐'.repeat(venue.michelinStars.count)}</span>
+                )}
+              </div>
+              <p className="text-base text-neutral-dark-light mt-1">{venue.location}</p>
+            </div>
 
-          {IS_LOGGED_IN ? (
-            <Badge items={BADGE_ITEMS} />
-          ) : (
-            <SignInBanner
-              heading="Sign in to unlock exclusive benefits"
-              body="Members enjoy priority bookings, special rates, and personalised offers."
+            {venue.specialOffer && <SpecialOfferBanner text={venue.specialOffer} />}
+
+            <p className="text-base text-neutral-dark-darkest leading-relaxed">{venue.description}</p>
+
+            {IS_LOGGED_IN ? (
+              <Badge items={BADGE_ITEMS} />
+            ) : (
+              <SignInBanner
+                heading="Sign in to unlock exclusive benefits"
+                body="Members enjoy priority bookings, special rates, and personalised offers."
+              />
+            )}
+
+            <ExperienceDetails details={DETAILS} />
+
+            <ExperienceCards
+              title={venue.name}
+              subtitle="Curated dining moments and signature events."
+              experiences={MOCK_EXPERIENCES}
             />
-          )}
-
-          <ExperienceDetails details={DETAILS} />
-
-          <ExperienceCards
-            title={venue.name}
-            subtitle="Curated dining moments and signature events."
-            experiences={MOCK_EXPERIENCES}
-          />
+          </div>
         </div>
-      </div>
+      </PageTransition>
 
       <NavWithButton
         primaryLabel="Reserve a table"

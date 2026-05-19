@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import PageTransition from '../../../components/ui/PageTransition'
 import StatusBar from '../../../components/layout/StatusBar'
 import PageHeading from '../../../components/layout/PageHeading'
 import Button from '../../../components/ui/Button'
@@ -41,50 +43,54 @@ export default function EmailLoginScreen() {
   return (
     <div className="flex flex-col min-h-svh bg-bg-default">
       <StatusBar />
-      <PageHeading title="" />
+      <PageTransition className="flex-1 flex flex-col">
+        <PageHeading title="" />
 
-      <div className="flex-1 flex flex-col px-6 pt-2">
-        <h2 className="text-2xl font-semibold text-text-primary mb-1">Enter your email</h2>
-        <p className="text-base text-text-secondary mb-8">We'll send you a sign-in code</p>
+        <div className="flex-1 flex flex-col px-6 pt-2">
+          <h2 className="text-2xl font-semibold text-text-primary mb-1">Enter your email</h2>
+          <p className="text-base text-text-secondary mb-8">We'll send you a sign-in code</p>
 
-        <TextField
-          type="email"
-          placeholder="Your email address"
-          value={email}
-          error={error}
-          onChange={e => { setEmail(e.target.value); setError('') }}
-          autoComplete="email"
-          autoFocus
-        />
+          <TextField
+            type="email"
+            placeholder="Your email address"
+            value={email}
+            error={error}
+            onChange={e => { setEmail(e.target.value); setError('') }}
+            autoComplete="email"
+            autoFocus
+          />
 
-        <div className="flex-1" />
+          <div className="flex-1" />
 
-        <div className="flex flex-col gap-4 pb-8">
-          <Button
-            variant="primary"
-            size="full"
-            onClick={handleSignIn}
-            disabled={!email.trim()}
-          >
-            Sign in
-          </Button>
-          <button
-            onClick={() => setTrySheetOpen(true)}
-            className="text-base font-semibold text-atlantis-blue-600 text-center"
-          >
-            Try another way
-          </button>
+          <div className="flex flex-col gap-4 pb-8">
+            <Button
+              variant="primary"
+              size="full"
+              onClick={handleSignIn}
+              disabled={!email.trim()}
+            >
+              Sign in
+            </Button>
+            <button
+              onClick={() => setTrySheetOpen(true)}
+              className="text-base font-semibold text-atlantis-blue-600 text-center"
+            >
+              Try another way
+            </button>
+          </div>
         </div>
-      </div>
+      </PageTransition>
 
-      {trySheetOpen && (
-        <TryAnotherWaySheet
-          context="email"
-          maskedEmail={maskedEmail}
-          onSelect={handleTryAnotherWay}
-          onClose={() => setTrySheetOpen(false)}
-        />
-      )}
+      <AnimatePresence>
+        {trySheetOpen && (
+          <TryAnotherWaySheet
+            context="email"
+            maskedEmail={maskedEmail}
+            onSelect={handleTryAnotherWay}
+            onClose={() => setTrySheetOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   )
 }

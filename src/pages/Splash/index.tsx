@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import PageTransition from '../../components/ui/PageTransition'
 import StatusBar from '../../components/layout/StatusBar'
 import Button from '../../components/ui/Button'
 import ProgressTabs from '../../components/ui/ProgressTabs'
@@ -17,21 +19,24 @@ export default function SplashScreen() {
 
   return (
     <div className="relative flex flex-col min-h-svh bg-neutral-dark-darkest overflow-hidden">
-      {/* Background */}
+      {/* Background — static, never animates */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-dark-dark/70 via-neutral-dark-darkest/40 to-neutral-dark-darkest" />
       </div>
 
-      <div className="relative flex flex-col min-h-svh">
+      {/* StatusBar — static, above animation */}
+      <div className="relative z-10">
         <StatusBar theme="dark" />
+      </div>
 
+      {/* Animated page content */}
+      <PageTransition className="relative z-10 flex-1 flex flex-col">
         <div className="pt-3 pb-4 shrink-0">
           <ProgressTabs total={4} active={0} dark />
         </div>
 
         {/* Center content */}
         <div className="flex-1 flex flex-col items-center justify-center px-8 pb-6">
-          {/* Logo mark */}
           <div className="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mb-10">
             <span className="font-heading text-neutral-light-lightest text-2xl tracking-widest">A</span>
           </div>
@@ -50,14 +55,16 @@ export default function SplashScreen() {
             Get started
           </Button>
         </div>
-      </div>
+      </PageTransition>
 
-      {sheetOpen && (
-        <SelectExperienceSheet
-          onSelect={handleSelect}
-          onClose={() => setSheetOpen(false)}
-        />
-      )}
+      <AnimatePresence>
+        {sheetOpen && (
+          <SelectExperienceSheet
+            onSelect={handleSelect}
+            onClose={() => setSheetOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   )
 }
